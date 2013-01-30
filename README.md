@@ -97,5 +97,6 @@ Units are in microseconds (us)
 + stencil from string literals is faster than clabango and hiccup,
 + stencil from files is even faster by a marginal amount.
 + Enlive and Laser are faster than Hiccup and Clabango
++ Hiccup benefits greatly from type-hinting and comes close to str
 
 Copyright © 2013 bitemyapp
