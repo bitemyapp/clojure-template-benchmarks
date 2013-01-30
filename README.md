@@ -1,13 +1,46 @@
 # clojure-template-benchmarks
 
-A Clojure library designed to ... well, that part is up to you.
+I decided to do some decent Clojure templating benchmarks:
 
-## Usage
+Template Engines tested:
+str
+hiccup
+clabango (string literals)
+clabango (from filesystem)
 
-FIXME
+Test cases:
+simple data injection
+small list (50 items) generation
+big list (1000 items) generation
 
-## License
+<table>
 
-Copyright © 2013 FIXME
+    <tr>
+      <th>Template Engine</th>
+      <th>Simple Data Injection</th>
+      <th>Small List</th>
+      <th>Big List</th>
+    </tr>
+    <tr>
+      <td>str</td>
+    </tr>
+    <tr>
+      <td>hiccup</td>
+    </tr>
+    <tr>
+      <td>clabango (string)</td>
+    </tr>
+    <tr>
+      <td>clabango (files)</td>
+    </tr>
 
-Distributed under the Eclipse Public License, the same as Clojure.
+</table>
+str
+
+hiccup
+
+clabango string literals
+
+clabango from filesystem
+
+Copyright © 2013 bitemyapp
