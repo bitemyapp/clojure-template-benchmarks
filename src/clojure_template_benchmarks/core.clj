@@ -59,6 +59,13 @@
 (deftemplate simple-tinsel [[:span {:class "foo"}]] [] (has-class? "foo") (set-content bar))
 (deftemplate list-tinsel [[:ul]] [ceil] (tag= :ul) (set-content (for [x (range 1 ceil)] [:li x])))
 
+
+(defn simple-enlive []
+  (str ""))
+
+(defn list-enlive [ceil]
+  (str ""))
+
 (defn -main [& args]
   ;; (println (simple-hiccup))
   ;; (println (simple-clabango-no-fd))

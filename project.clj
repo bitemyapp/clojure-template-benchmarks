@@ -5,8 +5,9 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :main clojure-template-benchmarks.core
   :dependencies [[org.clojure/clojure "1.4.0"]
-                 [criterium "0.3.1"]
-                 [hiccup "1.0.2"]
                  [clabango "0.4"]
+                 [criterium "0.3.1"]
+                 [enlive "1.0.0"]
+                 [hiccup "1.0.2"]
                  [stencil "0.3.0"]
                  [tinsel "0.4.0"]])
