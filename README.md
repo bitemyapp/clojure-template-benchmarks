@@ -37,6 +37,18 @@ Test results are avg / standard deviation.
       <td>1.79 ms / 52 us</td>
       <td>19.9 ms / 573 us</td>
     </tr>
+    <tr>
+      <td>stencil (string)</td>
+      <td>58 us / 6 us</td>
+      <td>212 us / 27 us</td>
+      <td>930 us / 37 us</td>
+    </tr>
+    <tr>
+      <td>stencil (file)</td>
+      <td>1.2 us / 22 us</td>
+      <td>38 us / 943 ns</td>
+      <td>784 us / 16 us</td>
+    </tr>
 
 </table>
 
@@ -45,5 +57,7 @@ Test results are avg / standard deviation.
 + str is really fast and a huge waste of programmer time.
 + clabango from filesystem templates or string literals are equivalent
 + clabango and hiccup are equivalent in performance
++ stencil from string literals is faster than clabango and hiccup,
++ stencil from files is even faster by a marginal amount.
 
 Copyright © 2013 bitemyapp

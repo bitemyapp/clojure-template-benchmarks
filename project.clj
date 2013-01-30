@@ -8,4 +8,5 @@
                  [criterium "0.3.1"]
                  [hiccup "1.0.2"]
                  [clabango "0.4"]
+                 [stencil "0.3.0"]
                  ])
