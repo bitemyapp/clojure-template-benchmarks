@@ -1,8 +1,9 @@
 (ns clojure-template-benchmarks.core
   (:use criterium.core
-        hiccup.core)
+        tinsel.core)
   (:require [clabango.parser :refer [render render-file]]
-            [stencil.core :as stencil]))
+            [stencil.core :as stencil]
+            [hiccup.core :as hiccup]))
 
 (def bar (str "bar"))
 
@@ -20,10 +21,10 @@
 
 
 (defn simple-hiccup []
-  (html [:span {:class "foo"} bar]))
+  (hiccup/html [:span {:class "foo"} bar]))
 
 (defn list-hiccup [ceil]
-  (html [:ul (for [x (range 1 ceil)]
+  (hiccup/html [:ul (for [x (range 1 ceil)]
                [:li x])]))
 
 
@@ -55,56 +56,76 @@
   (stencil/render-file "clojure_template_benchmarks/templates/list.mustache" {:items (range 1 ceil)}))
 
 
+(deftemplate simple-tinsel [[:span {:class "foo"}]]
+  []
+  (set-content bar))
+
+(deftemplate list-tinsel [[:ul]]
+  [ceil]
+  (set-content (for [x (range 1 ceil)]
+                 [:li x])))
+
+
 (defn -main [& args]
   ;; (println (simple-hiccup))
   ;; (println (simple-clabango-no-fd))
   ;; (println (count (list-filler-hiccup)))
   ;; (println (count (list-filler-clabango-no-fd)))
 
-  (println "\n\n ***** str benchmarks ***** \n\n")
-  (with-progress-reporting (quick-bench (simple-str)))
-  (println "\n --- \n")
-  (with-progress-reporting (quick-bench (list-str 50)))
-  (println "\n --- \n")
-  (with-progress-reporting (quick-bench (list-str 1000)))
-  (println "\n --- \n")
+  ;; (println "\n\n ***** str benchmarks ***** \n\n")
+  ;; (with-progress-reporting (quick-bench (simple-str)))
+  ;; (println "\n --- \n")
+  ;; (with-progress-reporting (quick-bench (list-str 50)))
+  ;; (println "\n --- \n")
+  ;; (with-progress-reporting (quick-bench (list-str 1000)))
+  ;; (println "\n --- \n")
   
-  (println "\n\n ***** hiccup benchmarks  ***** \n\n")
-  (with-progress-reporting (quick-bench (simple-hiccup)))
-  (println "\n --- \n")
-  (with-progress-reporting (quick-bench (list-hiccup 50)))
-  (println "\n --- \n")
-  (with-progress-reporting (quick-bench (list-hiccup 1000)))
-  (println "\n --- \n")
+  ;; (println "\n\n ***** hiccup benchmarks  ***** \n\n")
+  ;; (with-progress-reporting (quick-bench (simple-hiccup)))
+  ;; (println "\n --- \n")
+  ;; (with-progress-reporting (quick-bench (list-hiccup 50)))
+  ;; (println "\n --- \n")
+  ;; (with-progress-reporting (quick-bench (list-hiccup 1000)))
+  ;; (println "\n --- \n")
 
-  (println "\n\n ***** clabango string ***** \n\n")
-  (quick-bench (simple-clabango-no-fd))
-  (println "\n --- \n")
-  (quick-bench (list-clabango-no-fd 50))
-  (println "\n --- \n")
-  (quick-bench (list-clabango-no-fd 1000))
-  (println "\n --- \n")
+  ;; (println "\n\n ***** clabango string ***** \n\n")
+  ;; (quick-bench (simple-clabango-no-fd))
+  ;; (println "\n --- \n")
+  ;; (quick-bench (list-clabango-no-fd 50))
+  ;; (println "\n --- \n")
+  ;; (quick-bench (list-clabango-no-fd 1000))
+  ;; (println "\n --- \n")
 
-  (println "\n\n ***** clabango from file template ***** \n\n")
-  (with-progress-reporting (quick-bench (simple-clabango)))
-  (println "\n --- \n")
-  (with-progress-reporting (quick-bench (list-clabango 50)))
-  (println "\n --- \n")
-  (with-progress-reporting (quick-bench (list-clabango 1000)))
-  (println "\n --- \n")
+  ;; (println "\n\n ***** clabango from file template ***** \n\n")
+  ;; (with-progress-reporting (quick-bench (simple-clabango)))
+  ;; (println "\n --- \n")
+  ;; (with-progress-reporting (quick-bench (list-clabango 50)))
+  ;; (println "\n --- \n")
+  ;; (with-progress-reporting (quick-bench (list-clabango 1000)))
+  ;; (println "\n --- \n")
 
-  (println "\n\n ***** stencil string ***** \n\n")
-  (with-progress-reporting (quick-bench (simple-stencil-no-fd)))
-  (println "\n --- \n")
-  (with-progress-reporting (quick-bench (list-stencil-no-fd 50)))
-  (println "\n --- \n")
-  (with-progress-reporting (quick-bench (list-stencil-no-fd 1000)))
-  (println "\n --- \n")
+  ;; (println "\n\n ***** stencil string ***** \n\n")
+  ;; (with-progress-reporting (quick-bench (simple-stencil-no-fd)))
+  ;; (println "\n --- \n")
+  ;; (with-progress-reporting (quick-bench (list-stencil-no-fd 50)))
+  ;; (println "\n --- \n")
+  ;; (with-progress-reporting (quick-bench (list-stencil-no-fd 1000)))
+  ;; (println "\n --- \n")
 
-  (println "\n\n ***** stencil file ***** \n\n")
-  (with-progress-reporting (quick-bench (simple-stencil)))
+  ;; (println "\n\n ***** stencil file ***** \n\n")
+  ;; (with-progress-reporting (quick-bench (simple-stencil)))
+  ;; (println "\n --- \n")
+  ;; (with-progress-reporting (quick-bench (list-stencil 50)))
+  ;; (println "\n --- \n")
+  ;; (with-progress-reporting (quick-bench (list-stencil 1000)))
+  ;; (println "\n --- \n")
+
+  (println (simple-tinsel))
+  (println (list-tinsel 50))
+  (println "\n\n ***** tinsel ***** \n\n")
+  (with-progress-reporting (quick-bench (simple-tinsel)))
   (println "\n --- \n")
-  (with-progress-reporting (quick-bench (list-stencil 50)))
+  (with-progress-reporting (quick-bench (list-tinsel 50)))
   (println "\n --- \n")
-  (with-progress-reporting (quick-bench (list-stencil 1000)))
+  (with-progress-reporting (quick-bench (list-tinsel 1000)))
   (println "\n --- \n"))

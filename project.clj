@@ -9,4 +9,4 @@
                  [hiccup "1.0.2"]
                  [clabango "0.4"]
                  [stencil "0.3.0"]
-                 ])
+                 [tinsel "0.4.0"]])
