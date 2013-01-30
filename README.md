@@ -48,7 +48,7 @@ Units are in microseconds (us)
     </tr>
     <tr>
       <td>stencil (file)</td>
-      <td>1.2 us / 22 us</td>
+      <td>1.2 us / 0.022 us</td>
       <td>38 us / 0.943 us</td>
       <td>784 us / 16 us</td>
     </tr>

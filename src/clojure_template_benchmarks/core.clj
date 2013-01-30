@@ -128,4 +128,5 @@
   (with-progress-reporting (quick-bench (list-tinsel 50)))
   (println "\n --- \n")
   (with-progress-reporting (quick-bench (list-tinsel 1000)))
-  (println "\n --- \n"))
+  (println "\n --- \n")
+  )
