@@ -56,7 +56,7 @@
   (stencil/render-file "clojure_template_benchmarks/templates/list.mustache" {:items (range 1 ceil)}))
 
 
-(deftemplate simple-tinsel [[:span {:class "foo"}]] [] (has-class? "foo") (set-content "bar"))
+(deftemplate simple-tinsel [[:span {:class "foo"}]] [] (has-class? "foo") (set-content bar))
 (deftemplate list-tinsel [[:ul]] [ceil] (tag= :ul) (set-content (for [x (range 1 ceil)] [:li x])))
 
 (defn -main [& args]

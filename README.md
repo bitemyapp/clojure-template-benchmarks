@@ -54,7 +54,7 @@ Units are in microseconds (us)
     </tr>
     <tr>
       <td>tinsel</td>
-      <td>0.0052 us / 0.00017 us</td>
+      <td>23.7 us / 5.5 us</td>
       <td>1,100 us / 52 us</td>
       <td>22,000 us / 770 us</td>
     </tr>
