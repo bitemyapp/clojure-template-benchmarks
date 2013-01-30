@@ -42,6 +42,8 @@ Test results are avg / standard deviation.
 
 ## Conclusions
 
-str is really fast and a huge waste of programmer time.
++ str is really fast and a huge waste of programmer time.
++ clabango from filesystem templates or string literals are equivalent
++ clabango and hiccup are equivalent in performance
 
 Copyright © 2013 bitemyapp
