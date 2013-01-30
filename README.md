@@ -32,7 +32,7 @@ Units are in microseconds (us)
       <td>clabango (string)</td>
       <td>329 us / 5.7 us</td>
       <td>1800 us / 146 us</td>
-      <td>20,600 ms / 799 us</td>
+      <td>20,600 us / 799 us</td>
     </tr>
     <tr>
       <td>clabango (files)</td>
