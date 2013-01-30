@@ -32,6 +32,13 @@ Units are in microseconds (us)
     </tr>
 
     <tr>
+      <td>hiccup (type-hinted)</td>
+      <td>0.335 us / 0.013 us</td>
+      <td>25 us / 0.431 us</td>
+      <td>498 us / 6.2 us</td>
+    </tr>
+
+    <tr>
       <td>clabango (string)</td>
       <td>329 us / 5.7 us</td>
       <td>1800 us / 146 us</td>

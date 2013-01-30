@@ -29,6 +29,13 @@
   (hiccup/html [:ul (for [x (range 1 ceil)]
                [:li x])]))
 
+(defn simple-hiccup-hint []
+  (hiccup/html [:span {:class "foo"} ^String bar]))
+
+(defn list-hiccup-hint [ceil]
+  (hiccup/html [:ul (for [x (range 1 ceil)]
+               [:li ^Number x])]))
+
 
 (defn simple-clabango-no-fd []
   (render (str "<span class=\"foo\">{{bar}}</span>") {:bar bar}))
@@ -97,6 +104,14 @@
   (with-progress-reporting (quick-bench (list-hiccup 50)))
   (println "\n --- \n")
   (with-progress-reporting (quick-bench (list-hiccup 1000)))
+  (println "\n --- \n")
+
+  (println "\n\n ***** type-hinted hiccup benchmarks  ***** \n\n")
+  (with-progress-reporting (quick-bench (simple-hiccup-hint)))
+  (println "\n --- \n")
+  (with-progress-reporting (quick-bench (list-hiccup-hint 50)))
+  (println "\n --- \n")
+  (with-progress-reporting (quick-bench (list-hiccup-hint 1000)))
   (println "\n --- \n")
 
   (println "\n\n ***** clabango string ***** \n\n")
