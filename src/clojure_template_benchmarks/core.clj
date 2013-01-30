@@ -4,7 +4,8 @@
   (:require [clabango.parser :refer [render render-file]]
             [stencil.core :as stencil]
             [hiccup.core :as hiccup]
-            [me.raynes.laser :as laser :refer [defdocument]]))
+            [me.raynes.laser :as laser :refer [defdocument]]
+            [net.cgrand.enlive-html :as enlive]))
 
 (def bar (str "bar"))
 
@@ -67,11 +68,14 @@
                         (for [x (range 1 ceil)]
                           (laser/node :li :content (str x)))))
 
-(defn simple-enlive []
-  (str ""))
+(enlive/deftemplate simple-enlive-core "clojure_template_benchmarks/templates/simple.enlive" []
+  [:span.foo] (enlive/content bar))
+(enlive/deftemplate list-enlive-core "clojure_template_benchmarks/templates/list.enlive" [ceil]
+  [:ul] (enlive/clone-for [x (range 1 ceil)]
+                          (enlive/content (str x))))
 
-(defn list-enlive [ceil]
-  (str ""))
+(defn simple-enlive [] (apply str (simple-enlive-core)))
+(defn list-enlive [ceil] (apply str (list-enlive-core ceil)))
 
 (defn -main [& args]
   ;; (println (simple-hiccup))
@@ -141,5 +145,13 @@
   (with-progress-reporting (quick-bench (list-laser 50)))
   (println "\n --- \n")
   (with-progress-reporting (quick-bench (list-laser 1000)))
+  (println "\n --- \n")
+
+  (println "\n\n ***** enlive ***** \n\n")
+  (with-progress-reporting (quick-bench (simple-enlive)))
+  (println "\n --- \n")
+  (with-progress-reporting (quick-bench (list-enlive 50)))
+  (println "\n --- \n")
+  (with-progress-reporting (quick-bench (list-enlive 1000)))
   (println "\n --- \n")
   )
