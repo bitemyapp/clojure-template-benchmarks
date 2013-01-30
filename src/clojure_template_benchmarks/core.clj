@@ -3,7 +3,9 @@
         tinsel.core)
   (:require [clabango.parser :refer [render render-file]]
             [stencil.core :as stencil]
-            [hiccup.core :as hiccup]))
+            [hiccup.core :as hiccup]
+            [me.raynes.laser :as laser :refer [defdocument]]
+            [net.cgrand.enlive-html :as enlive]))
 
 (def bar (str "bar"))
 
@@ -59,12 +61,21 @@
 (deftemplate simple-tinsel [[:span {:class "foo"}]] [] (has-class? "foo") (set-content bar))
 (deftemplate list-tinsel [[:ul]] [ceil] (tag= :ul) (set-content (for [x (range 1 ceil)] [:li x])))
 
+(defdocument simple-laser "<span class=\"foo\"></span>" []
+  (laser/class= "foo") (laser/content bar))
+(defdocument list-laser "<ul></ul>" [ceil]
+  (laser/element= :ul) (laser/html-content
+                        (for [x (range 1 ceil)]
+                          (laser/node :li :content (str x)))))
 
-(defn simple-enlive []
-  (str ""))
+(enlive/deftemplate simple-enlive-core "clojure_template_benchmarks/templates/simple.enlive" []
+  [:span.foo] (enlive/content bar))
+(enlive/deftemplate list-enlive-core "clojure_template_benchmarks/templates/list.enlive" [ceil]
+  [:ul] (enlive/clone-for [x (range 1 ceil)]
+                          (enlive/content (str x))))
 
-(defn list-enlive [ceil]
-  (str ""))
+(defn simple-enlive [] (apply str (simple-enlive-core)))
+(defn list-enlive [ceil] (apply str (list-enlive-core ceil)))
 
 (defn -main [& args]
   ;; (println (simple-hiccup))
@@ -72,53 +83,53 @@
   ;; (println (count (list-filler-hiccup)))
   ;; (println (count (list-filler-clabango-no-fd)))
 
-  ;; (println "\n\n ***** str benchmarks ***** \n\n")
-  ;; (with-progress-reporting (quick-bench (simple-str)))
-  ;; (println "\n --- \n")
-  ;; (with-progress-reporting (quick-bench (list-str 50)))
-  ;; (println "\n --- \n")
-  ;; (with-progress-reporting (quick-bench (list-str 1000)))
-  ;; (println "\n --- \n")
+  (println "\n\n ***** str benchmarks ***** \n\n")
+  (with-progress-reporting (quick-bench (simple-str)))
+  (println "\n --- \n")
+  (with-progress-reporting (quick-bench (list-str 50)))
+  (println "\n --- \n")
+  (with-progress-reporting (quick-bench (list-str 1000)))
+  (println "\n --- \n")
   
-  ;; (println "\n\n ***** hiccup benchmarks  ***** \n\n")
-  ;; (with-progress-reporting (quick-bench (simple-hiccup)))
-  ;; (println "\n --- \n")
-  ;; (with-progress-reporting (quick-bench (list-hiccup 50)))
-  ;; (println "\n --- \n")
-  ;; (with-progress-reporting (quick-bench (list-hiccup 1000)))
-  ;; (println "\n --- \n")
+  (println "\n\n ***** hiccup benchmarks  ***** \n\n")
+  (with-progress-reporting (quick-bench (simple-hiccup)))
+  (println "\n --- \n")
+  (with-progress-reporting (quick-bench (list-hiccup 50)))
+  (println "\n --- \n")
+  (with-progress-reporting (quick-bench (list-hiccup 1000)))
+  (println "\n --- \n")
 
-  ;; (println "\n\n ***** clabango string ***** \n\n")
-  ;; (quick-bench (simple-clabango-no-fd))
-  ;; (println "\n --- \n")
-  ;; (quick-bench (list-clabango-no-fd 50))
-  ;; (println "\n --- \n")
-  ;; (quick-bench (list-clabango-no-fd 1000))
-  ;; (println "\n --- \n")
+  (println "\n\n ***** clabango string ***** \n\n")
+  (quick-bench (simple-clabango-no-fd))
+  (println "\n --- \n")
+  (quick-bench (list-clabango-no-fd 50))
+  (println "\n --- \n")
+  (quick-bench (list-clabango-no-fd 1000))
+  (println "\n --- \n")
 
-  ;; (println "\n\n ***** clabango from file template ***** \n\n")
-  ;; (with-progress-reporting (quick-bench (simple-clabango)))
-  ;; (println "\n --- \n")
-  ;; (with-progress-reporting (quick-bench (list-clabango 50)))
-  ;; (println "\n --- \n")
-  ;; (with-progress-reporting (quick-bench (list-clabango 1000)))
-  ;; (println "\n --- \n")
+  (println "\n\n ***** clabango from file template ***** \n\n")
+  (with-progress-reporting (quick-bench (simple-clabango)))
+  (println "\n --- \n")
+  (with-progress-reporting (quick-bench (list-clabango 50)))
+  (println "\n --- \n")
+  (with-progress-reporting (quick-bench (list-clabango 1000)))
+  (println "\n --- \n")
 
-  ;; (println "\n\n ***** stencil string ***** \n\n")
-  ;; (with-progress-reporting (quick-bench (simple-stencil-no-fd)))
-  ;; (println "\n --- \n")
-  ;; (with-progress-reporting (quick-bench (list-stencil-no-fd 50)))
-  ;; (println "\n --- \n")
-  ;; (with-progress-reporting (quick-bench (list-stencil-no-fd 1000)))
-  ;; (println "\n --- \n")
+  (println "\n\n ***** stencil string ***** \n\n")
+  (with-progress-reporting (quick-bench (simple-stencil-no-fd)))
+  (println "\n --- \n")
+  (with-progress-reporting (quick-bench (list-stencil-no-fd 50)))
+  (println "\n --- \n")
+  (with-progress-reporting (quick-bench (list-stencil-no-fd 1000)))
+  (println "\n --- \n")
 
-  ;; (println "\n\n ***** stencil file ***** \n\n")
-  ;; (with-progress-reporting (quick-bench (simple-stencil)))
-  ;; (println "\n --- \n")
-  ;; (with-progress-reporting (quick-bench (list-stencil 50)))
-  ;; (println "\n --- \n")
-  ;; (with-progress-reporting (quick-bench (list-stencil 1000)))
-  ;; (println "\n --- \n")
+  (println "\n\n ***** stencil file ***** \n\n")
+  (with-progress-reporting (quick-bench (simple-stencil)))
+  (println "\n --- \n")
+  (with-progress-reporting (quick-bench (list-stencil 50)))
+  (println "\n --- \n")
+  (with-progress-reporting (quick-bench (list-stencil 1000)))
+  (println "\n --- \n")
 
   (println "\n\n ***** tinsel ***** \n\n")
   (with-progress-reporting (quick-bench (simple-tinsel)))
@@ -126,5 +137,21 @@
   (with-progress-reporting (quick-bench (list-tinsel 50)))
   (println "\n --- \n")
   (with-progress-reporting (quick-bench (list-tinsel 1000)))
+  (println "\n --- \n")
+
+  (println "\n\n ***** laser ***** \n\n")
+  (with-progress-reporting (quick-bench (simple-laser)))
+  (println "\n --- \n")
+  (with-progress-reporting (quick-bench (list-laser 50)))
+  (println "\n --- \n")
+  (with-progress-reporting (quick-bench (list-laser 1000)))
+  (println "\n --- \n")
+
+  (println "\n\n ***** enlive ***** \n\n")
+  (with-progress-reporting (quick-bench (simple-enlive)))
+  (println "\n --- \n")
+  (with-progress-reporting (quick-bench (list-enlive 50)))
+  (println "\n --- \n")
+  (with-progress-reporting (quick-bench (list-enlive 1000)))
   (println "\n --- \n")
   )
