@@ -16,42 +16,49 @@ Units are in microseconds (us)
       <th>Small List (50 items)</th>
       <th>Big List (1000 items)</th>
     </tr>
+
     <tr>
       <td>str</td>
       <td>0.165 us / 0.016 us</td>
       <td>14 us / 0.253 us</td>
       <td>273 us / 14 us</td>
     </tr>
+
     <tr>
       <td>hiccup</td>
       <td>20 us / 0.367 us</td>
       <td>1100 us / 59 us</td>
       <td>24,000 us / 2900 us</td>
     </tr>
+
     <tr>
       <td>clabango (string)</td>
       <td>329 us / 5.7 us</td>
       <td>1800 us / 146 us</td>
       <td>20,600 us / 799 us</td>
     </tr>
+
     <tr>
       <td>clabango (files)</td>
       <td>478 us / 42 us</td>
       <td>1,790 us / 52 us</td>
       <td>19,900 us / 573 us</td>
     </tr>
+
     <tr>
       <td>stencil (string)</td>
       <td>58 us / 6 us</td>
       <td>212 us / 27 us</td>
       <td>930 us / 37 us</td>
     </tr>
+
     <tr>
       <td>stencil (file)</td>
       <td>1.2 us / 0.022 us</td>
       <td>38 us / 0.943 us</td>
       <td>784 us / 16 us</td>
     </tr>
+
     <tr>
       <td>tinsel</td>
       <td>23.7 us / 5.5 us</td>
