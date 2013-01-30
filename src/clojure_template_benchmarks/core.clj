@@ -56,15 +56,8 @@
   (stencil/render-file "clojure_template_benchmarks/templates/list.mustache" {:items (range 1 ceil)}))
 
 
-(deftemplate simple-tinsel [[:span {:class "foo"}]]
-  []
-  (set-content bar))
-
-(deftemplate list-tinsel [[:ul]]
-  [ceil]
-  (set-content (for [x (range 1 ceil)]
-                 [:li x])))
-
+(deftemplate simple-tinsel [[:span {:class "foo"}]] [] (has-class? "foo") (set-content "bar"))
+(deftemplate list-tinsel [[:ul]] [ceil] (tag= :ul) (set-content (for [x (range 1 ceil)] [:li x])))
 
 (defn -main [& args]
   ;; (println (simple-hiccup))
@@ -120,8 +113,6 @@
   ;; (with-progress-reporting (quick-bench (list-stencil 1000)))
   ;; (println "\n --- \n")
 
-  (println (simple-tinsel))
-  (println (list-tinsel 50))
   (println "\n\n ***** tinsel ***** \n\n")
   (with-progress-reporting (quick-bench (simple-tinsel)))
   (println "\n --- \n")
