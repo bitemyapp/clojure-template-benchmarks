@@ -66,6 +66,20 @@ Units are in microseconds (us)
       <td>22,000 us / 770 us</td>
     </tr>
 
+    <tr>
+      <td>laser</td>
+      <td>73.6 us / 1.5 us</td>
+      <td>243 us / 18 us</td>
+      <td>3,400 us / 61 us</td>
+    </tr>
+
+    <tr>
+      <td>enlive</td>
+      <td>38 us / 0.435 us</td>
+      <td>320 us / 10 us</td>
+      <td>6,400 us / 450 us</td>
+    </tr>
+
 </table>
 
 ## Conclusions
@@ -75,5 +89,6 @@ Units are in microseconds (us)
 + clabango and hiccup are equivalent in performance
 + stencil from string literals is faster than clabango and hiccup,
 + stencil from files is even faster by a marginal amount.
++ Enlive and Laser are faster than Hiccup and Clabango
 
 Copyright © 2013 bitemyapp
