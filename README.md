@@ -18,7 +18,7 @@ Units are in microseconds (us)
     </tr>
     <tr>
       <td>str</td>
-      <td>165 us / 0.016 us</td>
+      <td>0.165 us / 0.016 us</td>
       <td>14 us / 0.253 us</td>
       <td>273 us / 14 us</td>
     </tr>
