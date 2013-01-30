@@ -10,4 +10,5 @@
                  [enlive "1.0.0"]
                  [hiccup "1.0.2"]
                  [stencil "0.3.0"]
-                 [tinsel "0.4.0"]])
+                 [tinsel "0.4.0" :exclusions [hickory]]
+                 [me.raynes/laser "0.1.21"]])
