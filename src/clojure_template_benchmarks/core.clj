@@ -97,7 +97,7 @@
   (println "\n --- \n")
   (with-progress-reporting (quick-bench (list-str 1000)))
   (println "\n --- \n")
-  
+
   (println "\n\n ***** hiccup benchmarks  ***** \n\n")
   (with-progress-reporting (quick-bench (simple-hiccup)))
   (println "\n --- \n")
