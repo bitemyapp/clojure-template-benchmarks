@@ -75,6 +75,13 @@
                         (for [x (range 1 ceil)]
                           (laser/node :li :content (str x)))))
 
+(defdocument simple-laser-hinted "<span class=\"foo\"></span>" []
+  (laser/class= "foo") (laser/content ^String bar))
+(defdocument list-laser-hinted "<ul></ul>" [ceil]
+  (laser/element= :ul) (laser/html-content
+                        (for [x (range 1 ceil)]
+                          (laser/node :li :content (str ^Number x)))))
+
 (enlive/deftemplate simple-enlive-core "clojure_template_benchmarks/templates/simple.enlive" []
   [:span.foo] (enlive/content bar))
 (enlive/deftemplate list-enlive-core "clojure_template_benchmarks/templates/list.enlive" [ceil]
@@ -162,6 +169,14 @@
   (with-progress-reporting (quick-bench (list-laser 1000)))
   (println "\n --- \n")
 
+  (println "\n\n ***** laser (hinted) ***** \n\n")
+  (with-progress-reporting (quick-bench (simple-laser-hinted)))
+  (println "\n --- \n")
+  (with-progress-reporting (quick-bench (list-laser-hinted 50)))
+  (println "\n --- \n")
+  (with-progress-reporting (quick-bench (list-laser-hinted 1000)))
+  (println "\n --- \n")
+  
   (println "\n\n ***** enlive ***** \n\n")
   (with-progress-reporting (quick-bench (simple-enlive)))
   (println "\n --- \n")
