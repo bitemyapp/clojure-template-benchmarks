@@ -81,6 +81,13 @@ Units are in microseconds (us)
     </tr>
 
     <tr>
+      <td>laser (type-hinted)</td>
+      <td>73.2 us / 3.0 us</td>
+      <td>220 us / 21 us</td>
+      <td>3,090 us / 101 us</td>
+    </tr>
+
+    <tr>
       <td>enlive</td>
       <td>38 us / 0.435 us</td>
       <td>320 us / 10 us</td>
