@@ -106,4 +106,10 @@ The unit 'us' is microseconds. Typical bullshit "ran this on my macbook" arrange
 
 ## Conclusions
 
++ (str ...), Mustache.clj, Tinsel, and Hiccup are all fast.
++ Raynes wasn't paying attention when he refactored laser. :P
++ Enlive hasn't changed at all.
++ Stencil seems less impressive than it used to, but it's still faster than most options.
++ Clabango has gotten worse.
+
 Copyright © 2013 bitemyapp
