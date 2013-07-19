@@ -33,7 +33,7 @@ The unit 'us' is microseconds. Typical bullshit "ran this on my macbook" arrange
 
     <tr>
       <td>hiccup (type-hinted)</td>
-      Identical to or slower than non-type-hinted hiccup.
+      <td>Identical to or slower than non-type-hinted hiccup.</td>
       <!-- <td>0.335 us / 0.013 us</td>
       <td>25 us / 0.431 us</td>
       <td>498 us / 6.2 us</td> -->
