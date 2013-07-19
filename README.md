@@ -6,7 +6,7 @@ Test results are avg / standard deviation.
 
 ## Data
 
-Units are in microseconds (us)
+The unit 'us' is microseconds. Typical bullshit "ran this on my macbook" arrangement. Run it on your own thing if you care.
 
 <table>
 
@@ -19,91 +19,91 @@ Units are in microseconds (us)
 
     <tr>
       <td>str</td>
-      <td>0.165 us / 0.016 us</td>
-      <td>14 us / 0.253 us</td>
-      <td>273 us / 14 us</td>
+      <td>0.365 us / 0.002 us</td>
+      <td>29 us / 0.220 us</td>
+      <td>572 us / 2 us</td>
     </tr>
 
     <tr>
       <td>hiccup</td>
-      <td>20 us / 0.367 us</td>
-      <td>1100 us / 59 us</td>
-      <td>24,000 us / 2900 us</td>
+      <td>0.673 us / 0.006 us</td>
+      <td>35 us / 1 us</td>
+      <td>682 us / 3 us</td>
     </tr>
 
     <tr>
       <td>hiccup (type-hinted)</td>
-      <td>0.335 us / 0.013 us</td>
+      Identical to or slower than non-type-hinted hiccup.
+      <!-- <td>0.335 us / 0.013 us</td>
       <td>25 us / 0.431 us</td>
-      <td>498 us / 6.2 us</td>
+      <td>498 us / 6.2 us</td> -->
     </tr>
 
     <tr>
       <td>clabango (string)</td>
-      <td>329 us / 5.7 us</td>
-      <td>1800 us / 146 us</td>
-      <td>20,600 us / 799 us</td>
+      <td>544 us / 6.7 us</td>
+      <td>2452 us / 17 us</td>
+      <td>30,000 us / 193 us</td>
     </tr>
 
     <tr>
       <td>clabango (files)</td>
-      <td>478 us / 42 us</td>
-      <td>1,790 us / 52 us</td>
-      <td>19,900 us / 573 us</td>
+      <td>665 us / 8.7 us</td>
+      <td>2,617 us / 22 us</td>
+      <td>30,450 us / 390 us</td>
     </tr>
 
     <tr>
       <td>stencil (string)</td>
-      <td>58 us / 6 us</td>
-      <td>212 us / 27 us</td>
-      <td>930 us / 37 us</td>
+      <td>90 us / 0.5 us</td>
+      <td>290 us / 2.7 us</td>
+      <td>1,300 us / 13 us</td>
     </tr>
 
     <tr>
       <td>stencil (file)</td>
-      <td>1.2 us / 0.022 us</td>
-      <td>38 us / 0.943 us</td>
-      <td>784 us / 16 us</td>
+      <td>2.2 us / 0.019 us</td>
+      <td>58 us / 0.465 us</td>
+      <td>1,148 us / 10 us</td>
+    </tr>
+
+    <tr>
+      <td>mustache.clj (file)</td>
+      <td>0.947 us / 0.006 us</td>
+      <td>26 us / 0.206 us</td>
+      <td>541 us / 4.7 us</td>
     </tr>
 
     <tr>
       <td>tinsel</td>
-      <td>23.7 us / 5.5 us</td>
-      <td>1,100 us / 52 us</td>
-      <td>22,000 us / 770 us</td>
+      <td>0.678 us / 0.006 us</td>
+      <td>34 us / 0.175 us</td>
+      <td>679 us / 7.1 us</td>
     </tr>
 
     <tr>
       <td>laser</td>
-      <td>73.6 us / 1.5 us</td>
-      <td>243 us / 18 us</td>
-      <td>3,400 us / 61 us</td>
+      <td>404 us / 9.4 us</td>
+      <td>3,770 us / 26 us</td>
+      <td>68,000 us / 925 us</td>
     </tr>
 
     <tr>
       <td>laser (type-hinted)</td>
-      <td>73.2 us / 3.0 us</td>
-      <td>220 us / 21 us</td>
-      <td>3,090 us / 101 us</td>
+      <td>401 us / 3.1 us</td>
+      <td>3,764 us / 18 us</td>
+      <td>69,408 us / 1,028 us</td>
     </tr>
 
     <tr>
       <td>enlive</td>
-      <td>38 us / 0.435 us</td>
-      <td>320 us / 10 us</td>
-      <td>6,400 us / 450 us</td>
+      <td>47 us / 0.397 us</td>
+      <td>385 us / 8.5 us</td>
+      <td>6,800 us / 51 us</td>
     </tr>
 
 </table>
 
 ## Conclusions
-
-+ str is really fast and a huge waste of programmer time.
-+ clabango from filesystem templates or string literals are equivalent
-+ clabango and hiccup are equivalent in performance
-+ stencil from string literals is faster than clabango and hiccup,
-+ stencil from files is even faster by a marginal amount.
-+ Enlive and Laser are faster than Hiccup and Clabango
-+ Hiccup benefits greatly from type-hinting and comes close to str
 
 Copyright © 2013 bitemyapp

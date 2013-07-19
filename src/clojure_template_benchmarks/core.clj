@@ -5,7 +5,8 @@
             [stencil.core :as stencil]
             [hiccup.core :as hiccup]
             [me.raynes.laser :as laser :refer [defdocument]]
-            [net.cgrand.enlive-html :as enlive]))
+            [net.cgrand.enlive-html :as enlive]
+            [me.shenfeng.mustache :as mustache]))
 
 (def bar (str "bar"))
 
@@ -64,6 +65,14 @@
 (defn list-stencil [ceil]
   (stencil/render-file "clojure_template_benchmarks/templates/list.mustache" {:items (range 1 ceil)}))
 
+(mustache/deftemplate simple-mst (slurp "src/clojure_template_benchmarks/templates/simple.mustache"))
+(mustache/deftemplate list-mst (slurp "src/clojure_template_benchmarks/templates/list.mustache"))
+
+(defn simple-mustache []
+  (simple-mst {:bar bar}))
+
+(defn list-mustache [ceil]
+  (list-mst {:items (range 1 ceil)}))
 
 (deftemplate simple-tinsel [[:span {:class "foo"}]] [] (has-class? "foo") (set-content bar))
 (deftemplate list-tinsel [[:ul]] [ceil] (tag= :ul) (set-content (for [x (range 1 ceil)] [:li x])))
@@ -71,14 +80,14 @@
 (defdocument simple-laser "<span class=\"foo\"></span>" []
   (laser/class= "foo") (laser/content bar))
 (defdocument list-laser "<ul></ul>" [ceil]
-  (laser/element= :ul) (laser/html-content
+  (laser/element= :ul) (laser/content
                         (for [x (range 1 ceil)]
                           (laser/node :li :content (str x)))))
 
 (defdocument simple-laser-hinted "<span class=\"foo\"></span>" []
   (laser/class= "foo") (laser/content ^String bar))
 (defdocument list-laser-hinted "<ul></ul>" [ceil]
-  (laser/element= :ul) (laser/html-content
+  (laser/element= :ul) (laser/content
                         (for [x (range 1 ceil)]
                           (laser/node :li :content (str ^Number x)))))
 
@@ -151,6 +160,14 @@
   (with-progress-reporting (quick-bench (list-stencil 50)))
   (println "\n --- \n")
   (with-progress-reporting (quick-bench (list-stencil 1000)))
+  (println "\n --- \n")
+
+  (println "\n\n ***** mustache file ***** \n\n")
+  (with-progress-reporting (quick-bench (simple-mustache)))
+  (println "\n --- \n")
+  (with-progress-reporting (quick-bench (list-mustache 50)))
+  (println "\n --- \n")
+  (with-progress-reporting (quick-bench (list-mustache 1000)))
   (println "\n --- \n")
 
   (println "\n\n ***** tinsel ***** \n\n")
