@@ -7,7 +7,8 @@
             [hiccup.core :as hiccup]
             [me.raynes.laser :as laser :refer [defdocument]]
             [net.cgrand.enlive-html :as enlive]
-            [me.shenfeng.mustache :as mustache]))
+            [me.shenfeng.mustache :as mustache]
+            [selmer.parser :as selmer]))
 
 (def bar (str "bar"))
 
@@ -54,10 +55,10 @@
 
 
 (defn simple-selmer []
-  (selmer/render-file "src/clojure_template_benchmarks/templates/simple.html" {:bar bar}))
+  (selmer/render-file "clojure_template_benchmarks/templates/simple.html" {:bar bar}))
 
 (defn list-selmer [ceil]
-  (selmer/render-file "src/clojure_template_benchmarks/templates/list.html" {:items (range 1 ceil)}))
+  (selmer/render-file "clojure_template_benchmarks/templates/list.html" {:items (range 1 ceil)}))
 
 
 (defn simple-stencil-no-fd []
@@ -208,8 +209,7 @@
   (println "\n --- \n")
   (with-progress-reporting (quick-bench (list-laser-hinted 50)))
   (println "\n --- \n")
-  (with-progress-reporting (quick-bench (list-laser-hinted 1000)))
-  (println "\n --- \n"))
+  (with-progress-reporting (quick-bench (list-laser-hinted 1000))))
 
 (defn enlive-benches []
   (println "\n\n ***** enlive ***** \n\n")
@@ -225,9 +225,9 @@
   ;; (println (simple-clabango-no-fd))
   ;; (println (count (list-filler-hiccup)))
   ;; (println (count (list-filler-clabango-no-fd)))
+  (selmer-benches)
   (mustache-benches)
   (stencil-benches)
-  (selmer-benches)
   (str-benches)
   (hiccup-benches)
   (clabango-benches)
