@@ -6,7 +6,8 @@
             [hiccup.core :as hiccup]
             [me.raynes.laser :as laser :refer [defdocument]]
             [net.cgrand.enlive-html :as enlive]
-            [me.shenfeng.mustache :as mustache]))
+            [me.shenfeng.mustache :as mustache]
+            [selmer.parser :as selmer]))
 
 (def bar (str "bar"))
 
@@ -21,6 +22,23 @@
        (for [n (range 1 ceil)]
          (str "<li>" n "</li>"))
        "</ul>"))
+
+
+(defn simple-selmer-no-fd []
+  (selmer/render "<span class=\"foo\">{{bar}}</span>" {:bar bar}))
+
+(defn list-selmer-no-fd [ceil]
+  (selmer/render "<ul>{% for item in items %}<li>{{item}}</li>{% endfor %}</ul>"
+                 {:items (range 1 ceil)}))
+
+(defn simple-selmer []
+  (selmer/render-file "clojure_template_benchmarks/templates/simple.html" {:bar bar}))
+
+(defn list-selmer [ceil]
+  (selmer/render-file "clojure_template_benchmarks/templates/list.html" {:items (range 1 ceil)}))
+
+(defn list-selmer-template [template ceil]
+  (selmer/render template {:items (range 1 ceil)}))
 
 
 (defn simple-hiccup []
@@ -50,6 +68,7 @@
 
 (defn list-clabango [ceil]
   (render-file "clojure_template_benchmarks/templates/list.html" {:items (range 1 ceil)}))
+
 
 
 (defn simple-stencil-no-fd []
@@ -146,6 +165,22 @@
   (with-progress-reporting (quick-bench (list-clabango 1000)))
   (println "\n --- \n")
 
+  (println "\n\n ***** selmer string ***** \n\n")
+  (quick-bench (simple-selmer-no-fd))
+  (println "\n --- \n")
+  (quick-bench (list-selmer-no-fd 50))
+  (println "\n --- \n")
+  (quick-bench (list-selmer-no-fd 1000))
+  (println "\n --- \n")
+
+  (println "\n\n ***** selmer from file template ***** \n\n")
+  (with-progress-reporting (quick-bench (simple-selmer)))
+  (println "\n --- \n")
+  (with-progress-reporting (quick-bench (list-selmer 50)))
+  (println "\n --- \n")
+  (with-progress-reporting (quick-bench (list-selmer 1000)))
+  (println "\n --- \n")
+
   (println "\n\n ***** stencil string ***** \n\n")
   (with-progress-reporting (quick-bench (simple-stencil-no-fd)))
   (println "\n --- \n")
@@ -193,7 +228,7 @@
   (println "\n --- \n")
   (with-progress-reporting (quick-bench (list-laser-hinted 1000)))
   (println "\n --- \n")
-  
+
   (println "\n\n ***** enlive ***** \n\n")
   (with-progress-reporting (quick-bench (simple-enlive)))
   (println "\n --- \n")
